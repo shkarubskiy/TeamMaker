@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>TeamMaker</title>
+</head>
+<body>
+  <div class="wrapper">
+    <main class="main">
+      <p id="textDesc" class="text-regular">Добавьте игроков<br>(минимум 4). <br>Имена игроков должны состоять из букв и цифр<br>и не должны повторяться</p>
+      <input id="input" class="input" type="text" list="names" placeholder=""  maxlength="18"/>
+      <datalist id="names"></datalist>
+      <button id="buttonAdd" class="button">Добавить</button>
+      <ol id="listNames" class="list"></ol>
+      <button id="buttonAssign" class="button">Назначить команды</button>
+      <details id="spoiler" class="spoiler">
+      	<summary class="spoiler__summary">Дополнительно</summary>
+        <button id="buttonRecent" class="button">Предыдущий результат</button>
+          <button id="buttonClear" class="button-red">Очистить память</button>
+      </details>
+      <p id="textFirstTeam" class="text-big">Первая команда</p>
+      <ol id="listFirstTeam" class="list"></ol>
+      <p id="textSecondTeam" class="text-big">Вторая команда</p>
+      <ol id="listSecondTeam" class="list"></ol>
+    </main>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
