@@ -83,12 +83,8 @@ body {
   border-radius: 16px;
 }
 
-.spoiler > * {
-  margin-bottom: 16px;
-}
-
-.spoiler > *:last-child {
-  margin-bottom: 0;
+.spoiler > .button {
+  margin-top: 16px;
 }
 
 .spoiler__button-red {
@@ -105,14 +101,6 @@ body {
   display: none;
 }
 
-/* OLD ========================================== */
-
-[class*="-big"] {
-  font-size: 32px;
-  border-bottom: solid 2px;
-  border-color: #bfd2f2;
-}
-
 /* PLAYERS ==================================== */
 
 .players > * {
@@ -121,4 +109,20 @@ body {
 
 .players > *:last-child {
   margin-bottom: 0;
+}
+
+/* TEAMS ====================================== */
+
+.teams > * {
+  margin-bottom: 16px;
+}
+
+.teams > *:last-child {
+  margin-bottom: 0;
+}
+
+.teams__text-big {
+  border-bottom: solid 2px;
+  border-color: #bfd2f2;
+  font-size: 32px;
 }

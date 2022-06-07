@@ -25,20 +25,15 @@
             class="players__input input"
             id="playersInput"
             type="text"
-            list="players__names"
+            list="playersNames"
             placeholder=""
             maxlength="18"
           />
-          <datalist id="players__names"></datalist>
+          <datalist id="playersNames"></datalist>
           <button id="playersButtonAdd" class="players__button button">
             Добавить
           </button>
-          <ol class="players__list list" id="playersList">
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-            <li>1</li>
-          </ol>
+          <ol class="players__list list" id="playersList"></ol>
           <button id="playersButtonAssign" class="players__button button">
             Назначить команды
           </button>
@@ -52,11 +47,11 @@
             </button>
           </details>
         </section>
-        <section class="teams" hidden>
-          <p id="textFirstTeam" class="text-big">Первая команда</p>
-          <ol id="listFirstTeam" class="list"></ol>
-          <p id="textSecondTeam" class="text-big">Вторая команда</p>
-          <ol id="listSecondTeam" class="list"></ol>
+        <section class="teams" id="teams">
+          <p class="teams__text-big text">Первая команда</p>
+          <ol id="teamsListFirst" class="teams__list list"></ol>
+          <p class="teams__text-big text">Вторая команда</p>
+          <ol id="teamsListSecond" class="teams__list list"></ol>
         </section>
       </main>
     </div>

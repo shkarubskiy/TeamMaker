@@ -23,9 +23,9 @@ function addItemToList(string, id) {
   deleteButton.onclick = function () {
     this.parentNode.remove();
     _gameData.players.splice(_gameData.players.indexOf(string), 1);
-    if (!checkForChildren("listNames")) {
-      hideElement("listNames");
-      hideElement("buttonAssign");
+    if (!checkForChildren("playersList")) {
+      hideElement("playersList");
+      hideElement("playersButtonAssign");
     }
   };
 
@@ -48,7 +48,7 @@ function saveRecentDataList(string) {
   saveLocalArray("recentPlayers", _gameData.recentPlayers);
 }
 function checkInput(string) {
-  if (_gameData.players.includes(input.value))
+  if (_gameData.players.includes(string))
     return { result: false, desc: "Имя не должно повторяться" };
   if (string == "") return { result: false, desc: "Имя не может быть пустым" };
   if (string.includes(","))
@@ -94,61 +94,40 @@ function fillTeamList(id, array) {
   }
 }
 
-buttonAdd.onclick = function () {
-  let input = document.getElementById("input");
+playersButtonAdd.onclick = function () {
+  let input = document.getElementById("playersInput");
   if (checkInput(input.value).result) {
     _gameData.players.push(input.value);
-    addItemToList(input.value, "listNames");
+    addItemToList(input.value, "playersList");
     input.value = "";
     input.focus();
   } else {
     alert(checkInput(input.value).desc);
   }
-  if (checkForChildren("listNames")) {
-    showElement("listNames");
-    showElement("buttonAssign");
+  if (checkForChildren("playersList")) {
+    showElement("playersList");
+    showElement("playersButtonAssign");
   }
 };
-buttonAssign.onclick = function () {
+playersButtonAssign.onclick = function () {
   if (assignTeams(_gameData.players)) {
-    fillTeamList("listFirstTeam", _gameData.firstTeam);
-    fillTeamList("listSecondTeam", _gameData.secondTeam);
-    hideElement("textDesc");
-    hideElement("input");
-    hideElement("buttonAdd");
-    hideElement("listNames");
-    hideElement("buttonAssign");
-    hideElement("spoiler");
-    showElement("textFirstTeam");
-    showElement("listFirstTeam");
-    showElement("textSecondTeam");
-    showElement("listSecondTeam");
+    fillTeamList("teamsListFirst", _gameData.firstTeam);
+    fillTeamList("teamsListSecond", _gameData.secondTeam);
+    hideElement("players");
+    showElement("teams");
     saveLocalArray("firstTeam", _gameData.firstTeam);
     saveLocalArray("secondTeam", _gameData.secondTeam);
   }
 };
-buttonClear.onclick = function () {
+spoilerButtonClear.onclick = function () {
   localStorage.clear();
 };
-buttonRecent.onclick = function () {
+spoilerButtonRestore.onclick = function () {
   fillTeamList("listFirstTeam", loadLocalArray("firstTeam"));
   fillTeamList("listSecondTeam", loadLocalArray("secondTeam"));
-  hideElement("textDesc");
-  hideElement("input");
-  hideElement("buttonAdd");
-  hideElement("listNames");
-  hideElement("buttonAssign");
-  hideElement("spoiler");
-  showElement("textFirstTeam");
-  showElement("listFirstTeam");
-  showElement("textSecondTeam");
-  showElement("listSecondTeam");
 };
 
-loadRecentDataList("names");
-hideElement("listNames");
-hideElement("buttonAssign");
-hideElement("textFirstTeam");
-hideElement("listFirstTeam");
-hideElement("textSecondTeam");
-hideElement("listSecondTeam");
+loadRecentDataList("playersNames");
+hideElement("playersList");
+hideElement("playersButtonAssign");
+hideElement("teams");
