@@ -14,47 +14,64 @@
     <title>TeamMaker</title>
   </head>
   <body>
-    <div class="wrapper">
+    <script src="https://unpkg.com/vue@next"></script>
+    <div class="wrapper" id="app">
       <header class="header">
-        <h1>Деление на команды</h1>
+        <h1>Разделение на команды</h1>
       </header>
       <main class="main">
-        <section id="players" class="players">
+        <section class="players" v-show="screens.players">
           <p class="players__text text">
             Добавьте игроков<br />(минимум 4). <br />Имена игроков должны
             состоять из букв и цифр<br />и не должны повторяться
           </p>
           <input
             class="players__input input"
-            id="playersInput"
+            ref="input"
+            v-model="input"
             type="text"
             list="playersNames"
             placeholder=""
             maxlength="18"
           />
-          <datalist id="playersNames"></datalist>
-          <button id="playersButtonAdd" class="players__button button">
+          <datalist>
+            <option v-for="player in recentPlayers" :value="player"></option>
+          </datalist>
+          <button class="players__button button" @click="addPlayerToList">
             Добавить
           </button>
-          <ol class="players__list list" id="playersList"></ol>
-          <button id="playersButtonAssign" class="players__button button">
+          <ol class="players__list list" v-show="playersList">
+            <li v-for="(player, index) in game.players">
+              {{ player }}
+              <a href="#" @click="deletePlayerFromList(index)">X</a>
+            </li>
+          </ol>
+          <button
+            class="players__button button"
+            v-show="playersButtonAssign"
+            @click="assignTeams(game.players)"
+          >
             Назначить команды
           </button>
-          <details class="players__spoiler spoiler" id="playersSpoiler">
+          <details class="players__spoiler spoiler">
             <summary class="spoiler__summary">Дополнительно</summary>
-            <button class="spoiler__button button" id="spoilerButtonRestore">
+            <button class="spoiler__button button" @click="restoreLocalData">
               Восстановить
             </button>
-            <button class="spoiler__button-red button" id="spoilerButtonClear">
+            <button class="spoiler__button-red button" @click="clearLocalData">
               Очистить память
             </button>
           </details>
         </section>
-        <section class="teams" id="teams">
+        <section class="teams" v-show="screens.teams" id="teams">
           <p class="teams__text-big text">Первая команда</p>
-          <ol id="teamsListFirst" class="teams__list list"></ol>
+          <ol class="teams__list list">
+            <li v-for="player in game.teams[0]">{{ player }}</li>
+          </ol>
           <p class="teams__text-big text">Вторая команда</p>
-          <ol id="teamsListSecond" class="teams__list list"></ol>
+          <ol class="teams__list list">
+            <li v-for="player in game.teams[1]">{{ player }}</li>
+          </ol>
         </section>
       </main>
     </div>
