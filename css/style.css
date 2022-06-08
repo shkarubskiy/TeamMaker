@@ -1,3 +1,5 @@
+/* ZEROING */
+
 *,
 *::before,
 *::after {
@@ -7,6 +9,19 @@
   box-sizing: border-box;
 }
 
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
 a {
   text-decoration: none;
   color: #ff6681;
@@ -25,18 +40,11 @@ body {
   max-width: 430px;
   min-width: 320px;
   margin: 0 auto;
-  padding: 16px;
+  padding: 32px 16px 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background-color: #6a5ae0;
-}
-
-.main {
-  padding: 16px;
-  overflow: hidden;
-  border-radius: 16px;
-  background-color: #ffffff;
 }
 
 /* ELEMENTS ====================================== */
@@ -101,10 +109,33 @@ body {
   display: none;
 }
 
+/* HEADER ===================================== */
+
+.header {
+  margin-bottom: 32px;
+  padding: 0 16px;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+/* MAIN ====================================== */
+
+.main {
+  padding: 32px 16px 16px;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #ffffff;
+}
+
 /* PLAYERS ==================================== */
 
 .players > * {
   margin-bottom: 16px;
+}
+
+.players > *:first-child {
+  margin-bottom: 32px;
 }
 
 .players > *:last-child {

@@ -5,14 +5,21 @@ let _gameData = {
   recentPlayers: loadLocalArray("recentPlayers"),
 };
 
+loadRecentDataList("playersNames");
+hideElement("playersList");
+hideElement("playersButtonAssign");
+hideElement("teams");
+
 function loadLocalArray(key) {
   if (localStorage.getItem(key) != null)
     return localStorage.getItem(key).split(",");
   else return [];
 }
+
 function saveLocalArray(key, array) {
   localStorage.setItem(key, array.toString());
 }
+
 function addItemToList(string, id) {
   let item = document.createElement("li");
   let deleteButton = document.createElement("a");
@@ -35,6 +42,7 @@ function addItemToList(string, id) {
   document.getElementById(id).appendChild(item);
   document.getElementById(id).lastChild.appendChild(deleteButton);
 }
+
 function loadRecentDataList(id) {
   let array = _gameData.recentPlayers.sort();
   for (let i = 0; i < array.length; i++) {
@@ -43,10 +51,12 @@ function loadRecentDataList(id) {
     document.getElementById(id).appendChild(item);
   }
 }
+
 function saveRecentDataList(string) {
   _gameData.recentPlayers.push(string);
   saveLocalArray("recentPlayers", _gameData.recentPlayers);
 }
+
 function checkInput(string) {
   if (_gameData.players.includes(string))
     return { result: false, desc: "Имя не должно повторяться" };
@@ -58,20 +68,25 @@ function checkInput(string) {
   if (string.length > 18) return { result: false, desc: "Имя слишком длинное" };
   return { result: true, desc: "Все корректно" };
 }
+
 function getRandomInt(min, max) {
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
+
 function hideElement(id) {
   document.getElementById(id).classList.add("hidden");
 }
+
 function showElement(id) {
   document.getElementById(id).classList.remove("hidden");
 }
+
 function checkForChildren(id) {
   if (document.getElementById(id).childNodes.length > 0) return true;
   else return false;
 }
+
 function assignTeams(array) {
   if (array.length > 3) {
     let buffer = array;
@@ -86,6 +101,7 @@ function assignTeams(array) {
   } else alert("Нужно больше игроков (Минимум 4)!");
   return false;
 }
+
 function fillTeamList(id, array) {
   for (let element of array) {
     let item = document.createElement("li");
@@ -109,6 +125,7 @@ playersButtonAdd.onclick = function () {
     showElement("playersButtonAssign");
   }
 };
+
 playersButtonAssign.onclick = function () {
   if (assignTeams(_gameData.players)) {
     fillTeamList("teamsListFirst", _gameData.firstTeam);
@@ -119,15 +136,12 @@ playersButtonAssign.onclick = function () {
     saveLocalArray("secondTeam", _gameData.secondTeam);
   }
 };
+
 spoilerButtonClear.onclick = function () {
   localStorage.clear();
 };
+
 spoilerButtonRestore.onclick = function () {
   fillTeamList("listFirstTeam", loadLocalArray("firstTeam"));
   fillTeamList("listSecondTeam", loadLocalArray("secondTeam"));
 };
-
-loadRecentDataList("playersNames");
-hideElement("playersList");
-hideElement("playersButtonAssign");
-hideElement("teams");
